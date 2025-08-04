@@ -2,8 +2,9 @@ import os
 import zipfile
 import logging
 import trimesh
+import requests
 import numpy as np
-import urllib.request
+from tqdm import tqdm
 
 def unzip(extract_path, file_path):
     """ Extracts zip file to given location"""
@@ -25,30 +26,54 @@ def unzip(extract_path, file_path):
 
 
 def download_data(url, download_path, extract_path, file_name):
-    """Downloads and extracts data from the web"""
-
+    """Downloads and extracts data from the web using requests"""
+    
     logger = logging.getLogger(__name__)
     
     if not os.path.exists(download_path):
         os.makedirs(download_path)
 
-    zip_path = os.path.join(download_path, file_name) # "modelnet.zip"
+    zip_path = os.path.join(download_path, file_name)
 
     try:
         if not os.path.exists(zip_path):
             logger.info(f"Downloading Data: {url} at location: {zip_path}")
-            urllib.request.urlretrieve(url, zip_path)
+            
+            # Streaming request
+            with requests.get(url, stream=True) as response:
+                response.raise_for_status()
+                total_size = int(response.headers.get('content-length', 0))
+                block_size = 1024  # 1 KB
+                with open(zip_path, 'wb') as f, tqdm(
+                    total=total_size,
+                    unit='B',
+                    unit_scale=True,
+                    unit_divisor=1024,
+                    desc=file_name
+                ) as progress_bar:
+                    for chunk in response.iter_content(chunk_size=block_size):
+                        if chunk:
+                            f.write(chunk)
+                            progress_bar.update(len(chunk))
+            
             logger.info("Downloading finished")
-        unzip(extract_path = extract_path, file_path = zip_path)
 
-    except urllib.error.HTTPError as e:
-        logger.error(f"HTTP Error: {e.code} - {e.reason} for URL: {url}")
+        unzip(extract_path=extract_path, file_path=zip_path)
 
-    except urllib.error.URLError as e:
-        logger.error(f"URL Error: {e.reason} for URL: {url}")
+    except requests.exceptions.HTTPError as e:
+        logger.error(f"HTTP Error: {e.response.status_code} - {e.response.reason} for URL: {url}")
+
+    except requests.exceptions.ConnectionError as e:
+        logger.error(f"Connection Error: {e} for URL: {url}")
+
+    except requests.exceptions.Timeout as e:
+        logger.error(f"Timeout Error: {e} for URL: {url}")
+
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Request Error: {e} for URL: {url}")
 
     except Exception as e:
-        logger.error(e)
+        logger.error(f"Unexpected Error: {e}")
 
 def read_off(file_path):
     """Reads .off file type and returns vertices in nparray."""
