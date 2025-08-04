@@ -4,7 +4,6 @@ from src.utils.common import read_yaml
 from src.utils.data import download_data
 
 class Ingestion:
-
     def __init__(self):
         self.config = read_yaml(CONFIG_PATH)
         print(self.config)
@@ -13,6 +12,9 @@ class Ingestion:
         self.zip_file_name = self.ingestion_config["zip_file_name"]
         self.extract_path = os.path.join(PROJECT_ROOT, self.ingestion_config["extract_path"])
         self.download_path = os.path.join(PROJECT_ROOT, self.ingestion_config["download_path"])
+
+    def __str__(self):
+        return f"Running Data Ingestion Stage"
 
     def process(self):
         """ Downloads and extracts dataset."""

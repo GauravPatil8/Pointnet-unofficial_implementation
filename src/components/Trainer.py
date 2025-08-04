@@ -27,6 +27,9 @@ class Trainer:
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
         self.criterion = nn.CrossEntropyLoss()
 
+    def __str__(self):
+        return f"Running Model Training Stage"
+    
     def train(self):
         self.model.train()
         total_loss, total_correct = 0.0, 0
