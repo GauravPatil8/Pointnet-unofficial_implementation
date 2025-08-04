@@ -8,7 +8,7 @@ class Pipeline:
         self.logger = logging.getLogger(__name__)
 
     def run_pipeline(self):
-        for stage in self.stages:
-            self.logger(stage)
+        for stage in self._stages:
             stage_init = stage()
+            self.logger.info(stage_init)
             stage_init.process()

@@ -9,5 +9,5 @@ data_ingestion:
 
 
 trainer:
-  root_dir: artifacts\modelnet
+  root_dir: artifacts\trained_model
   model_path: artifacts\modelnet\model.pth

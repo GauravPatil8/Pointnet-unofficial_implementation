@@ -6,7 +6,6 @@ from src.utils.data import download_data
 class Ingestion:
     def __init__(self):
         self.config = read_yaml(CONFIG_PATH)
-        print(self.config)
         self.ingestion_config = self.config["data_ingestion"]
         self.url = self.ingestion_config["data_url"]
         self.zip_file_name = self.ingestion_config["zip_file_name"]

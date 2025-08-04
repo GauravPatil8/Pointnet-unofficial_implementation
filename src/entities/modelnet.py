@@ -2,17 +2,8 @@ import os
 import glob
 import numpy as np
 import torch
-from src.utils.data import read_off
-from torch.utils.data import Dataset, DataLoader
-
-
-def get_classes(data_dir):
-    """Returns list classes present in the dataset."""
-    classes = []
-    for cls in os.listdir(data_dir):
-        if os.path.isdir(os.path.join(data_dir,cls)):
-            classes.append(cls)
-    return classes
+from src.utils.data import read_off, get_classes
+from torch.utils.data import Dataset
 
 class ModelNet(Dataset):
     def __init__(self, data_dir, split='train', num_points=2048):
@@ -25,7 +16,7 @@ class ModelNet(Dataset):
         for cls in self.classes:
             split_dir = os.path.join(data_dir, cls, split)
             for f in glob.glob(os.path.join(split_dir,'*.off')):
-                self.files.append((f, self.class_to_idx[cls]))
+                self.files.append((f, self.classes_to_index[cls]))
 
     def __len__(self):
         return len(self.files)

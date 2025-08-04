@@ -85,3 +85,11 @@ def read_off(file_path):
     except Exception as e:
         logger.error(f"Failed to load OFF file {file_path}: {e}")
         raise ValueError(f"Failed to load OFF file {file_path}: {e}")
+
+def get_classes(data_dir):
+    """Returns list classes present in the dataset."""
+    classes = []
+    for cls in os.listdir(data_dir):
+        if os.path.isdir(os.path.join(data_dir,cls)):
+            classes.append(cls)
+    return classes
