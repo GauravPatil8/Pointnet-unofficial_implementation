@@ -1,15 +1,7 @@
-import os
-import logging
-from src.pipeline import run_pipeline
+from src.pipeline import Pipeline
+from src.utils.common import logger_init
 
 if __name__ == "__main__":
-    os.makedirs(R"src/logs/", exist_ok=True)
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.FileHandler(R"src/logs/info.log"),
-            logging.StreamHandler()
-        ]
-    )
-    run_pipeline()
+    logger_init()
+    pipeline = Pipeline()
+    pipeline.run_pipeline()

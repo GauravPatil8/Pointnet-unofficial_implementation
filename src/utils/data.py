@@ -1,7 +1,9 @@
 import os
 import zipfile
-import urllib.request
 import logging
+import trimesh
+import numpy as np
+import urllib.request
 
 def unzip(extract_path, file_path):
     """ Extracts zip file to given location"""
@@ -40,10 +42,21 @@ def download_data(url, download_path, extract_path, file_name):
         unzip(extract_path = extract_path, file_path = zip_path)
 
     except urllib.error.HTTPError as e:
-        logger.info(f"HTTP Error: {e.code} - {e.reason} for URL: {url}")
+        logger.error(f"HTTP Error: {e.code} - {e.reason} for URL: {url}")
 
     except urllib.error.URLError as e:
-        logger.info(f"URL Error: {e.reason} for URL: {url}")
+        logger.error(f"URL Error: {e.reason} for URL: {url}")
 
     except Exception as e:
-        logger.info(e)
+        logger.error(e)
+
+def read_off(file_path):
+    """Reads .off file type and returns vertices in nparray."""
+    logger = logging.getLogger(__name__)
+    try:
+        mesh = trimesh.load(file_path, file_type='off')
+        verts = mesh.vertices
+        return np.array(verts, dtype=np.float32)
+    except Exception as e:
+        logger.error(f"Failed to load OFF file {file_path}: {e}")
+        raise ValueError(f"Failed to load OFF file {file_path}: {e}")

@@ -207,6 +207,6 @@ marimo/_lsp/
 __marimo__/
 
 #project specific
-artifact
+artifacts
 notebook
 logs/

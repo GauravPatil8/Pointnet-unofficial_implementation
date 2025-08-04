@@ -1,7 +1,11 @@
 from src.components.Ingestion import Ingestion
-stages = [Ingestion]
+from src.components.Trainer import Trainer
 
-def run_pipeline():
-    for stage in stages:
-        stage_init = Ingestion()
-        stage_init.process()
+class Pipeline:
+    def __init__(self):
+        self._stages = [Ingestion, Trainer]
+
+    def run_pipeline(self):
+        for stage in self.stages:
+            stage_init = stage()
+            stage_init.process()

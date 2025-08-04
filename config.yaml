@@ -6,3 +6,8 @@ data_ingestion:
   extract_path: artifacts\data_ingestion\ModelNet10
   data_url: https://3dvision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip
   zip_file_name: modelnet.zip
+
+
+trainer:
+  root_dir: artifacts\modelnet
+  model_path: artifacts\modelnet\model.pth
