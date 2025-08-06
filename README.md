@@ -62,7 +62,7 @@ The PointNet architecture can be broken down into 5 major stages:
 
 # PointNet 3D Shape Classifier
 
-![Placeholder Image of PointNet Architecture](./assets/pointnet_architecture_placeholder.png)
+![Placeholder Image of PointNet Architecture](./media/project_demo.png)
 
 A simple implementation of PointNet to classify 3D objects from point cloud data. This project includes both training and deployment via a Streamlit web app.
 
@@ -76,7 +76,7 @@ A simple implementation of PointNet to classify 3D objects from point cloud data
 ```bash
 # Clone the repo and navigate to project
 git clone https://github.com/GauravPatil8/Pointnet-unofficial_implementation.git
-cd pointnet-project
+cd Pointnet-unofficial_implementation
 ```
 ```bash
 # Create and activate a conda environment
