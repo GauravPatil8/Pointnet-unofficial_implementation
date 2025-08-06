@@ -108,6 +108,15 @@ docker build -t pointnet-app .
 # Run the container
 docker run -p 8501:8501 pointnet-app
 ```
+### Option B:  Run Locally Without Docker
+```bash
+# Activate environment if not already active
+conda activate pointnet-env
+```
+```bash
+# Run the Streamlit app
+python app/main.py
+```
 ---
 
 ## Citation
