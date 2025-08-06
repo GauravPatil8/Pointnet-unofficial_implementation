@@ -126,8 +126,6 @@ def main():
                     - Global max pooling for permutation invariance
                     - Classification: 1024 → 512 → 256 → 4 classes
                     - Batch normalization and dropout for regularization
-                    
-                    **Classes:** Cube, Sphere, Cylinder, Cone
                     """)
 
 if __name__ == '__main__':
