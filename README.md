@@ -75,7 +75,7 @@ A simple implementation of PointNet to classify 3D objects from point cloud data
 #### Step-by-Step:
 ```bash
 # Clone the repo and navigate to project
-git clone https://github.com/your-username/pointnet-project.git
+git clone https://github.com/GauravPatil8/Pointnet-unofficial_implementation.git
 cd pointnet-project
 ```
 ```bash
