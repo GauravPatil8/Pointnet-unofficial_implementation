@@ -4,6 +4,6 @@ plotly==6.2.0
 pyyaml==6.0.2
 requests>=2.25.0,<3.0.0
 streamlit==1.47.1
-# torch==2.7.1  uncomment this if installing outside of container
+torch==2.7.1  
 tqdm==4.67.1
 trimesh==4.6.8
