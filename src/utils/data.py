@@ -75,13 +75,14 @@ def download_data(url, download_path, extract_path, file_name):
     except Exception as e:
         logger.error(f"Unexpected Error: {e}")
 
-def read_off(file_path):
+def read_off(file_path, num_points):
     """Reads .off file type and returns vertices in nparray."""
     logger = logging.getLogger(__name__)
     try:
         mesh = trimesh.load(file_path, file_type='off')
-        verts = mesh.vertices
-        return np.array(verts, dtype=np.float32)
+        points, _ = trimesh.sample.sample_surface(mesh, num_points) #now samples from entire surface instead of just vertices
+        return np.array(points, dtype=np.float32)
+    
     except Exception as e:
         logger.error(f"Failed to load OFF file {file_path}: {e}")
         raise ValueError(f"Failed to load OFF file {file_path}: {e}")

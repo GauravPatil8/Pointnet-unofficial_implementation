@@ -69,7 +69,7 @@ class Trainer:
             
         try:
             model_path = os.path.join(PROJECT_ROOT, self.config["trainer"]["model_path"])
-            os.makedirs(model_path, exist_ok=True) 
+            os.makedirs(os.path.dirname(model_path), exist_ok=True) 
             torch.save(self.model.state_dict(), model_path) # only weights are stored
             logger.info(f"Trained model saved at {model_path}")
 
