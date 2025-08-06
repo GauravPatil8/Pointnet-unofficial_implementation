@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 
 class ModelNet(Dataset):
     def __init__(self, data_dir, split='train', num_points=2048):
-        self.num_points = 2048
+        self.num_points = num_points
         self.classes = get_classes(data_dir)
         self.classes_to_index = {cls_name: i for i, cls_name in enumerate(self.classes)}
         self.files = []
