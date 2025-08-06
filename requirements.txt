@@ -2,8 +2,8 @@ numpy==2.0.1
 pandas==2.3.1
 plotly==6.2.0
 pyyaml==6.0.2
-requests==2.34.4
+requests>=2.25.0,<3.0.0
 streamlit==1.47.1
-torch==2.7.1
+# torch==2.7.1  uncomment this if installing outside of container
 tqdm==4.67.1
 trimesh==4.6.8

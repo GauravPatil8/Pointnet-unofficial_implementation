@@ -1,13 +1,15 @@
+# if deploying on windows change the '/' to '\'
+
 root_dir: artifacts
 
 data_ingestion:
-  root_dir: artifacts\data_ingestion
-  download_path: artifacts\data_ingestion\Downloads
-  extract_path: artifacts\data_ingestion\
+  root_dir: artifacts/data_ingestion
+  download_path: artifacts/data_ingestion/Downloads
+  extract_path: artifacts/data_ingestion/
   data_url: https://3dvision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip
   zip_file_name: modelnet.zip
 
 
 trainer:
-  root_dir: artifacts\trained_model
-  model_path: artifacts\trained_model\model_weights.pth
+  root_dir: artifacts/trained_model
+  model_path: artifacts/trained_model/model_weights.pth

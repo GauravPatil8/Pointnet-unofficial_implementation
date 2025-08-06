@@ -93,4 +93,4 @@ def get_classes(data_dir):
     for cls in os.listdir(data_dir):
         if os.path.isdir(os.path.join(data_dir,cls)):
             classes.append(cls)
-    return classes
+    return sorted(classes)
